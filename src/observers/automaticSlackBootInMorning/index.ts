@@ -2,6 +2,9 @@ import Slack from '../../services/api/Slack';
 import DateService from '../../services/date';
 
 class AutomaticSlackBootInMorning implements IObserver {
+
+	public readonly name = "automatic.slack.boot.inMorning"
+
 	public init = () => {
 		// setInterval(this.updateBlink, 5000 * 60);
 	}

@@ -3,6 +3,8 @@ import SlackSetToInactiveObserverUtils from './utils';
 
 class SlackSetToInactiveObserver extends SlackSetToInactiveObserverUtils implements IObserver {
 
+	public readonly name = "slack.setToInactive"
+
 	public init = () => {
 		// setInterval(this.updateBlink, 5000 * 60);
 	}
