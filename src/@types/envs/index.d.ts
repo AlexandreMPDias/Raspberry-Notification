@@ -2,9 +2,9 @@
 import { AppEnvironment, IAppEnvs } from './app';
 import { ISlackEnvs } from './slack';
 import { IClickUpEnvs } from './clickUp';
+import { IGitHubEnvs } from './github'
 
-
-interface AllAppEnvs extends IAppEnvs, ISlackEnvs, IClickUpEnvs {
+interface AllAppEnvs extends IAppEnvs, ISlackEnvs, IClickUpEnvs, IGitHubEnvs {
 	NODE_ENV: AppEnvironment;
 	PWD: string;
 }
