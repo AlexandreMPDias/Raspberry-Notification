@@ -11,7 +11,7 @@ class SlackObserver extends ObserverUtils implements IObserver {
 
 	public shouldExecute = () => {
 		const deltaSeconds = DateService.elapsed(this.lastHandle);
-		return deltaSeconds >= 2;
+		return deltaSeconds >= 5;
 	}
 
 	public handle = async () => {
