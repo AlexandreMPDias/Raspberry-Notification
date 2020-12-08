@@ -2,6 +2,7 @@ import "./config";
 import DateService from './services/date';
 import observers from './observers';
 import globalObservers from './observers/globals';
+import schedulers from './schedulers'
 import chalk from 'chalk';
 
 console.log('Starting execution');
@@ -11,6 +12,7 @@ const showTimestamp = () => {
 }
 
 async function main() {
+    schedulers.scheduleCronJobs();
     await globalObservers.init();
     console.log(`Workhours set to ${DateService.workhour.pretty()}`);
     observers.init();
