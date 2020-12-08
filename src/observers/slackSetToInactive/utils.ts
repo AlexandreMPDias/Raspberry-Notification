@@ -1,5 +1,3 @@
-import "./config";
-import chalk from 'chalk'
 import Slack from '../../services/api/Slack';
 import IO from '../../services/Gpio';
 import DateService from '../../services/date';
