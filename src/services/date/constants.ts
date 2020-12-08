@@ -3,7 +3,7 @@ abstract class DateServiceConstants {
 
 	protected readonly WORK_HOUR = {
 		from: 11.0,
-		to: 18.0
+		to: 19.0
 	}
 }
 

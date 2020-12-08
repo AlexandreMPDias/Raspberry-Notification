@@ -1,5 +1,4 @@
-import { Gpio } from 'onoff'
-import { MockGpio } from './mockedGpio'
+import { Gpio } from './gpioModule.secret'
 
 const GpioClass = Gpio;
 
