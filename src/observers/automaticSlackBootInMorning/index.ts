@@ -1,4 +1,3 @@
-import "./config";
 import Slack from '../../services/api/Slack';
 import DateService from '../../services/date';
 
