@@ -16,7 +16,7 @@ class SlackSetToInactiveObserverUtils {
 		return [
 			status.presence === 'away',
 			profile.status_text?.match(/Away|Booting/)
-		].every(x => x);
+		].some(x => x);
 	}
 
 	protected updateBlink = () => {
