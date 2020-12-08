@@ -14,13 +14,14 @@ export class SlackRequestClass {
 		},
 	})
 
-	public post = (url: string, data: object) => {
+	protected post = (url: string, data: object) => {
 		return this.attempt(url, () => this.axios.post(url, data));
 	}
 
-	public get = <Data = any>(url: string): Promise<Data> => {
+	protected get = <Data = any>(url: string): Promise<Data> => {
 		return this.attempt(url, () => this.axios.get(url));
 	}
+
 
 	private attempt = (url: string, request: (() => Promise<any>)) => {
 		try {

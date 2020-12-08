@@ -1,12 +1,11 @@
-import Slack from '../../services/api/Slack';
+import { Slack } from '../../services/api';
 import DateService from '../../services/date';
-
+import SlackObserver from '../globals/slack';
 class AutomaticSlackBootInMorning implements IObserver {
 
 	public readonly name = "automatic.slack.boot.inMorning"
 
 	public init = () => {
-		// setInterval(this.updateBlink, 5000 * 60);
 	}
 
 	public shouldExecute = () => {
@@ -14,11 +13,10 @@ class AutomaticSlackBootInMorning implements IObserver {
 		return now.getHours() === 9 && now.getMinutes() <= 20
 	}
 
-	public handle = async () => {
-
-		const status = await Slack.getStatus();
-		if (status.presence === 'away') {
-			Slack.updateStatus("Booting", ":zzz:");
+	public handle = () => {
+		const { status, profile } = SlackObserver.data;
+		if (status.presence === 'away' && profile.status_emoji !== ':zzz:') {
+			Slack.profile.set("Booting", ":zzz:");
 		}
 	}
 }

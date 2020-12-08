@@ -26,7 +26,7 @@ class DateServiceConstructor extends DateServiceConstants {
 	}
 
 	public elapsed = (since: Dateish) => {
-		return differenceInSeconds(since, this.now())
+		return differenceInSeconds(this.now(), since)
 	}
 
 	private applyTimezone = (date: number | Date): Date => {

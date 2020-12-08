@@ -1,12 +1,10 @@
 import DateService from '../../services/date';
 import SlackSetToInactiveObserverUtils from './utils';
-
 class SlackSetToInactiveObserver extends SlackSetToInactiveObserverUtils implements IObserver {
 
 	public readonly name = "slack.setToInactive"
 
 	public init = () => {
-		// setInterval(this.updateBlink, 5000 * 60);
 	}
 
 	public shouldExecute = () => {
@@ -14,21 +12,12 @@ class SlackSetToInactiveObserver extends SlackSetToInactiveObserverUtils impleme
 	}
 
 	public handle = async () => {
-		const elapsed = this.getTimeSinceLastHandle();
-		const handleFrequency = this.getHandleFrequency();
-		if (elapsed >= handleFrequency) {
-			console.log(`SlackSetToInactive: ${elapsed} seconds since last handle - handling`);
+		this.blinkingEnable = this.shouldBlink();
 
-			const status = await this.getSlackStatus();
-			if (status.presence === 'away') {
-				this.blinkingEnable = true
-				if (!this.led.isBlinking) {
-					this.led.blink(100);
-				}
-			} else {
-				this.led.stopBlinking();
-				this.led.turnOff();
-			}
+		if (this.blinkingEnable) {
+			this.led.blink(100)
+		} else {
+			this.led.stopBlinking()
 		}
 	}
 }

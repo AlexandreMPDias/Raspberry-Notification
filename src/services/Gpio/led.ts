@@ -1,4 +1,7 @@
 import { Gpio } from 'onoff'
+import { MockGpio } from './mockedGpio'
+
+const GpioClass = Gpio;
 
 class Led {
     private pin: number;
@@ -6,41 +9,55 @@ class Led {
     private active: boolean;
     private blinking: boolean;
     private interval: NodeJS.Timeout;
+    private blinkingFrequency: number | null = null;
 
     constructor(pin: number) {
         this.pin = pin;
-        this.io = new Gpio(this.pin, "out");
+        this.io = new GpioClass(this.pin, "out");
         this.active = false;
         this.turnOff();
     }
 
-    turnOn = () => {
-        this.active = true;
-        this.io.writeSync(1)
+    turnOn = (skipCheck?: true) => {
+        if (!this.active || skipCheck) {
+            this.active = true;
+            this.io.writeSync(1)
+        }
     }
 
-    turnOff = () => {
-        this.active = false
-        this.io.writeSync(0)
+    turnOff = (skipCheck?: true) => {
+        if (this.active || skipCheck) {
+            this.active = false
+            this.io.writeSync(0)
+        }
     }
 
     blink = (frequency: number = 500) => {
+        const shouldNoBlink = [
+            this.blinking,
+            frequency === this.blinkingFrequency
+        ].every(x => x);
+        if (shouldNoBlink) return;
+        this.stopBlinking();
+
         this.blinking = true;
-        if(this.interval) {
-            clearInterval(this.interval)
-        }
+        this.blinkingFrequency = frequency;
+        this.interval && clearInterval(this.interval)
         this.interval = setInterval(() => {
-            const active = this.io.readSync();
-            this.active = Boolean(active);
-            this.io.writeSync(active ? 0 : 1)
+            if (this.active) {
+                this.turnOff(true);
+            } else {
+                this.turnOn(true);
+            }
         }, frequency)
     }
 
     stopBlinking = () => {
         this.blinking = false;
-        if(this.interval) {
-            clearInterval(this.interval)
-        }
+        this.interval && clearInterval(this.interval)
+        this.blinkingFrequency = null;
+        this.turnOff()
+
     }
 
     get isOn() {
