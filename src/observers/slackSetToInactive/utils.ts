@@ -1,10 +1,10 @@
-import IO from '../../services/Gpio';
+import Gpio from '../../services/gpio';
 import DateService from '../../services/date';
 import SlackObserver from '../globals/slack';
 
 class SlackSetToInactiveObserverUtils {
 
-	protected led = IO.led.inactiveStatus;
+	protected led = Gpio.led.inactiveStatus;
 
 	protected lastHandle: Date = DateService.now();
 	protected blinkingFrequency: number = 300;
