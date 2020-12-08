@@ -11,12 +11,9 @@ class SlackSetToInactiveObserverUtils {
 	protected blinkingEnable: boolean = false;
 
 	protected shouldBlink = (): boolean => {
-		const { status, profile } = SlackObserver.data;
+		const { profile } = SlackObserver.data;
 
-		return [
-			status.presence === 'away',
-			profile.status_text?.match(/Away|Booting/)
-		].some(x => x);
+		return !!profile.status_text?.match(/Away|Booting/);
 	}
 
 	protected updateBlink = () => {
