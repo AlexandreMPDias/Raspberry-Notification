@@ -18,7 +18,7 @@ class SlackStatus extends SlackRequestClass {
 	}
 
 	getStatus = async () => {
-		const response = await this.get<{ data: { presence: string, online: boolean, last_activity: number } }>('users.getPresence')
+		const response = await this.get<{ data: Slack.Status }>('users.getPresence')
 		return (response.data);
 	}
 
