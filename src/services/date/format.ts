@@ -1,7 +1,7 @@
 import format from 'date-fns/format';
 
 interface IFormat {
-	(date: Dateish, key: "HH:mm" | "DD/MM HH:mm"): string;
+	(date: Dateish, key: "HH:mm" | "dd/MM HH:mm"): string;
 }
 
 const myFormat: IFormat = (date, key) => {

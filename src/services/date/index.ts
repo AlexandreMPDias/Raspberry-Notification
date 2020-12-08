@@ -11,7 +11,7 @@ class DateServiceConstructor extends DateServiceConstants {
 	public format: format.type;
 
 	public get timestamp() {
-		return chalk.green(this.format(this.now(), 'DD/MM HH:mm'));
+		return chalk.green(this.format(this.now(), 'dd/MM HH:mm'));
 	}
 
 	public constructor() {
