@@ -11,7 +11,7 @@ class SlackSetToInactiveObserver extends SlackSetToInactiveObserverUtils impleme
 		return DateService.workhour.is();
 	}
 
-	public handle = async () => {
+	public handle = () => {
 		this.blinkingEnable = this.shouldBlink();
 
 		if (this.blinkingEnable) {
