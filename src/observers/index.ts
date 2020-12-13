@@ -1,10 +1,12 @@
 // Observers
 import automaticSlackBootInMorning from './automaticSlackBootInMorning';
 import slackSetToInactive from './slackSetToInactive';
+import hasPendingReview from './hasPendingReview';
 
 const observers: IObserver[] = [
 	automaticSlackBootInMorning,
-	slackSetToInactive
+	slackSetToInactive,
+	hasPendingReview
 ]
 
 function loop() {
