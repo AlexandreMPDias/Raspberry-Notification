@@ -41,7 +41,7 @@ class Led {
 
         this.blinking = true;
         this.blinkingFrequency = frequency;
-        this.interval && clearInterval(this.interval)
+        this.interval ?? clearInterval(this.interval)
         this.interval = setInterval(() => {
             if (this.active) {
                 this.turnOff(true);

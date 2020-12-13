@@ -8,9 +8,7 @@ class PendingReviewObserver
 	public init = () => { };
 
 	public shouldExecute = () => {
-		const deltaSeconds = DateService.elapsed(this.lastHandle);
-		return deltaSeconds >= 25;
-		// return DateService.workhour.is() && deltaSeconds >= 5;
+		return DateService.elapsed(this.lastHandle) >= 600 && DateService.workhour.is();
 	};
 
 	public handle = async () => {
